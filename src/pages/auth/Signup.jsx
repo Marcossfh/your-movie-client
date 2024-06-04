@@ -31,7 +31,7 @@ function Signup() {
 
       //const response = await axios.post("http://localhost:5005/api/movies/signup", newUser)
       //console.log(response)
-      await service.post("/movies/signup", newUser)
+      await service.post("/auth/signup", newUser)
       
       navigate("/login")
 

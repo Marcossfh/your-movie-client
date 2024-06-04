@@ -30,7 +30,7 @@ function Login() {
 
       //const response = await axios.post("http://localhost:5005/api/movies/login", userCredentials)
       
-      const response = await service.post("/movies/login", userCredentials)
+      const response = await service.post("/auth/login", userCredentials)
       
       //almacenamos el token en localStorage
       localStorage.setItem("authToken", response.data.authToken)

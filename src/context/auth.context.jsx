@@ -31,7 +31,7 @@ const [ loggedUserId, setLoggedUserId ] = useState(null)
               //  headers: { authorization: `Bearer ${authToken}` }
             //})
 
-            const response = await service.get("/movies/verify")
+            const response = await service.get("/auth/verify")
 
             //el token es valido
             setIsLoggedIn(true)
