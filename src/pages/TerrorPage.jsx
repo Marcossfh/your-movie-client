@@ -6,15 +6,15 @@ import FichaMoviePage from './FichaMoviePage'
 import MovieCard from '../components/MovieCard'
 function TerrorPage() {
 
-    const [ TerrorList, setTerrorList] = useState([])
+    const [ movieList, setMovieList] = useState([])
 
     useEffect (() => {
 
        
-    service.get(`${import.meta.env.VITE_BACKEND_URL}/api/movies/terror/genre`)
+    service.get(`/movies/terror/genre`)
     .then((response) => {
         console.log(response)
-        setTerrorList(response.data)
+        setMovieList(response.data)
        })
     .catch((error) => {
         console.log(error)
@@ -26,8 +26,8 @@ function TerrorPage() {
     <div className="TerrorPage">
       
       
-      {TerrorList.map((eachTerror) =>{ 
-          return <MovieCard  key={eachTerror.title} eachTerror={eachTerror}/>
+      {movieList.map((eachMovie) =>{ 
+          return <MovieCard  key={eachMovie.title} eachMovie={eachMovie}/>
          
           
           

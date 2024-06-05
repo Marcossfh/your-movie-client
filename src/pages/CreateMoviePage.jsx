@@ -10,7 +10,13 @@ function CreateMoviePage() {
   const [relatedMovies, setRelatedMovies] = useState("")
   const [sinopsis, setSinopsis ] = useState("")
 
-  const handleSubmit = (e) => {
+  const handleTitleChange = (e) => setTitle(e.target.value);
+  const handleCharacters = (e) => setCharacters(e.target.value);
+  const handleRelatedMovies = (e) => setRelatedMovies(e.target.value);
+  const handleSinopsis = (e) => setSinopsis(e.target.value);
+
+
+  const handleSubmit = async (e) => {
     e.preventDefault()
   
 
@@ -21,18 +27,16 @@ function CreateMoviePage() {
     sinopsis,
   }
 
- 
-
-  service.post(`${import.meta.env.VITE_BACKEND_URL}/api/movies`, newProject)
-  .then(() => {
-  console.log("creado guay")
-  //navigate("/main-movies-page")
-  })
-  .catch((error) => {
+    console.log("creando", newProject)
+ try{
+  console.log(import.meta.env.VITE_BACKEND_URL)
+  await service.post("/movies", newProject)
+  
+ }catch (error) {
     console.log(error)
-  })
+  //})
   }
-    
+} 
 
 
   return (
@@ -45,7 +49,7 @@ function CreateMoviePage() {
           type="text"
           name="title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={handleTitleChange}
         />
 
       <label>Characters:</label>
@@ -53,7 +57,7 @@ function CreateMoviePage() {
                 type="text"
                 name="characters"
                 value={characters}
-                onChange={(e) => setCharacters(e.target.value)}
+                onChange={handleCharacters}
               />
 
       <label>Related Movies:</label>
@@ -61,7 +65,7 @@ function CreateMoviePage() {
                 type="text"
                 name="relatedMovies"
                 value={relatedMovies}
-                onChange={(e) => setRelatedMovies(e.target.value)}
+                onChange={handleRelatedMovies}
               />
 
       <label>Sinopsis:</label>
@@ -69,7 +73,7 @@ function CreateMoviePage() {
                 type="text"
                 name="sinopsis"
                 value={sinopsis}
-                onChange={(e) => setSinopsis(e.target.value)}
+                onChange={handleSinopsis}
               />
               
         <button type="submit">Submit</button>

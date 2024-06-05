@@ -12,10 +12,11 @@ import FichaMoviePage from "./pages/FichaMoviePage"
 import CreateMoviePage from "./pages/CreateMoviePage"
 import CommentPage from "./pages/CommentPage" 
 import NotFound from "./pages/NotFound";
-
+import EditMoviePage from "./pages/EditMoviePage";
 import OnlyPrivate from "./components/OnlyPrivate";
 
 import Navbar from "./components/Navbar"
+
 
 /*<Route path="/create-movies-page" element={  <CreateMoviePage /> } />
 import CreateMoviePage from "./pages/CreateMoviePage"*/
@@ -39,6 +40,7 @@ function App() {
         <Route path="/syfy-page" element={  <SyfyPage /> } />
         <Route path="/ficha-movies-page/:movieId" element={  <FichaMoviePage /> } />
         <Route path="/create-movies-page" element={  <CreateMoviePage /> } />
+        <Route path="/edit-movie/:movieId" element={  <EditMoviePage /> } />
         <Route path="/comment-page" element={ <CommentPage /> } />
         <Route path="*" element={ <NotFound />} />
         {/* error FE routes here... */}

@@ -6,40 +6,37 @@ import FichaMoviePage from './FichaMoviePage'
 import MovieCard from '../components/MovieCard'
 function SyfyPage() {
 
-    const [ SyfyList, setSyfyList] = useState([])
+  const [ movieList, setMovieList] = useState([])
 
-    useEffect (() => {
+  useEffect (() => {
 
+     
+  service.get(`/movies/syfy/genre`)
+  .then((response) => {
+      console.log(response)
+      setMovieList(response.data)
+     })
+  .catch((error) => {
+      console.log(error)
+  })
+  },[])
+ 
+
+return (
+  <div className="SyfyPage">
+    
+    
+    {movieList.map((eachMovie) =>{ 
+        return <MovieCard  key={eachMovie.title} eachMovie={eachMovie}/>
        
-    service.get(`${import.meta.env.VITE_BACKEND_URL}/api/movies/syfy/genre`)
-    .then((response) => {
-        console.log(response)
-        setSyfyList(response.data)
-       })
-    .catch((error) => {
-        console.log(error)
-    })
-    },[])
-   
+           
+        
   
-  return (
-    <div className="SyfyPage">
-      
-      {SyfyList.map((eachSyfy) =>{ 
-          return (  
-          <Link to= {`/ficha-movies-page/${eachSyfy._id}`}>
-          
-          <MovieCard  key={eachSyfy._id} eachSyfy={eachSyfy}/>
-    </Link>)
-    })}
-        
-        
-        
-        
-      
-      </div>
+  })}
+    
+    </div>
 
-  )
+)
 }
 
 export default SyfyPage

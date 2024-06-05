@@ -15,7 +15,7 @@ function FichaMoviePage() {
 
   useEffect(() => {
 
-    service.get(`${import.meta.env.VITE_BACKEND_URL}/api/movies/${params.movieId}`)
+    service.get(`/movies/${params.movieId}`)
     .then((response) => {
         console.log(response)
         setFichaMovie(response.data)
@@ -42,14 +42,17 @@ function FichaMoviePage() {
         <p>sinopsis:{fichaMovie.sinopsis}</p>
 
     </div>
-
+    
+   
+    
     <Link to="/main-movies-page">
         <button>back to main</button>
     </Link>
 
-    <Link to={`/movies/:movieId`}>
+    <Link to={`/edit-movie/${fichaMovie._id}`}>
         <button>editar peli</button>
-    </Link>
+  </Link>
+  
 
 
 
