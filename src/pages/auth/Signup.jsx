@@ -26,11 +26,11 @@ function Signup() {
       password: password,
       username: username
     }
-
     try{
 
       //const response = await axios.post("http://localhost:5005/api/movies/signup", newUser)
       //console.log(response)
+      console.log(import.meta.env.VITE_BACKEND_URL)
       await service.post("/auth/signup", newUser)
       
       navigate("/login")

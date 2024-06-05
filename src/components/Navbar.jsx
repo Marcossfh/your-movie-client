@@ -34,6 +34,7 @@ function Navbar() {
           {isLoggedIn === true && <> 
           <Link to="/main-movies-page">Pagina principal</Link>
           <Link onClick={handleLogout}>Cerrar sesión</Link>
+          
           </>}
         </nav>
       );
