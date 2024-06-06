@@ -1,5 +1,6 @@
-import { useContext } from "react"
 import { Link, useNavigate } from "react-router-dom"
+import { useContext, useEffect } from "react"
+//importar cntxt
 import { AuthContext } from "../context/auth.context"
 
 function Navbar() {
@@ -19,6 +20,10 @@ function Navbar() {
     navigate("/login")
 
   }
+  //meto useEffect para actualizar el estado cada vez que entras al navegador
+  useEffect(() => {
+    aunthenticateUser()
+  }, [aunthenticateUser])
 
     return (
       

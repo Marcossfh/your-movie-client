@@ -13,7 +13,7 @@ import CreateMoviePage from "./pages/CreateMoviePage"
 import CommentPage from "./pages/CommentPage" 
 import NotFound from "./pages/NotFound";
 import EditMoviePage from "./pages/EditMoviePage";
-import OnlyPrivate from "./components/OnlyPrivate";
+
 
 import Navbar from "./components/Navbar"
 
