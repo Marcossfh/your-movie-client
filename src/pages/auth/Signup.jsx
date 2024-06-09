@@ -48,7 +48,7 @@ function Signup() {
   };
 
   return (
-    <div>
+    <div className="Signup">
 
       <h1>Formulario de Registro</h1>
     

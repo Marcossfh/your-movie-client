@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import service from "../services/config.services";
 
 import MovieCard from "../components/MovieCard";
-function TerrorPage() {
+import { AuthContext } from "../context/auth.context";
+function FavoritosPage() {
   const [movieList, setMovieList] = useState([]);
+  const { loggedUserId } = useContext(AuthContext);
 
   useEffect(() => {
     service
-      .get(`/movies/terror/genre`)
+      .get(`/favorito/${loggedUserId}`)
       .then((response) => {
         console.log(response);
         setMovieList(response.data);
@@ -19,7 +21,7 @@ function TerrorPage() {
   }, []);
 
   return (
-    <div className="TerrorPage">
+    <div className="FavoritoPage">
       {movieList.map((eachMovie) => {
         return <MovieCard key={eachMovie.title} eachMovie={eachMovie} />;
       })}
@@ -27,4 +29,4 @@ function TerrorPage() {
   );
 }
 
-export default TerrorPage;
+export default FavoritosPage;

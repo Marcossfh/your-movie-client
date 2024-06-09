@@ -1,4 +1,3 @@
-//importar context
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Link } from "react-router-dom";
@@ -8,8 +7,8 @@ import { useParams } from "react-router-dom";
 
 function CommentBox(props) {
   const params = useParams();
-  //inicializamos cntx
-  const { loggedUserId } = useContext(AuthContext);
+
+  const { loggedUsername, loggedUserId } = useContext(AuthContext);
   const [comments, setComments] = useState(null);
   const [newComment, setNewComment] = useState("");
 
@@ -24,7 +23,6 @@ function CommentBox(props) {
         console.log(error);
       });
   }, []);
-  //is loading
 
   //CREATE COMMENT
 
@@ -39,23 +37,22 @@ function CommentBox(props) {
 
     try {
       await service.post(`/comment/`, nuevoComment);
-        const response = await  service.get(`/comment/${params.movieId}`)
-        console.log(response.data)
-        setComments(response.data)
-        
-      //hago peticion al be y traigo todos los comentarios de esta peli, los metemos en el estado comment usando setComents
+      const response = await service.get(`/comment/${params.movieId}`);
+
+      console.log(response.data);
+      setComments(response.data);
     } catch (error) {
       console.log(error);
     }
   };
-  
-  //DELETE COMMENT//condicionales de si es usuario es el dueño muestra o no boton
+
+  //DELETE COMMENT
   const handleDelete = async (eachComment) => {
     try {
       await service.delete(`/comment/${eachComment._id}`);
-      const response = await  service.get(`/comment/${params.movieId}`)
-      console.log(response.data)
-      setComments(response.data) 
+      const response = await service.get(`/comment/${params.movieId}`);
+      console.log(response.data);
+      setComments(response.data);
       console.log("comentario borrado");
     } catch (error) {
       console.log(error);
@@ -74,20 +71,20 @@ function CommentBox(props) {
 
         <button type="submit">Submit</button>
       </form>
-      {/*la espera tengo que repasarla */}
+
       <div>
         {comments === null || comments.length === 0 ? (
           <p>No hay comentarios.</p>
         ) : (
           comments.map((eachComment) => (
             <div key={eachComment._id}>
-              {eachComment.text}
-              {/* lo metemos de lo que recoge el map solo para logeados*/}
+              <p>{eachComment.text}</p>
+              <p>
+                <small>Usuario:{loggedUsername}</small>
+              </p>
+
               {eachComment.user === loggedUserId && (
-                <button
-                  type="button"
-                  onClick={() => handleDelete(eachComment)}
-                >
+                <button type="button" onClick={() => handleDelete(eachComment)}>
                   Delete
                 </button>
               )}

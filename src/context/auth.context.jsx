@@ -12,6 +12,7 @@ function AuthWrapper(props) {
 
 const [ isLoggedIn, setIsLoggedIn ] = useState(false)
 const [ loggedUserId, setLoggedUserId ] = useState(null)
+const [ loggedUsername, setLoggedUsername ] = useState(null)//para pillar al username
 
     const aunthenticateUser = async () => {
 
@@ -22,6 +23,7 @@ const [ loggedUserId, setLoggedUserId ] = useState(null)
         if(!authToken){
             setIsLoggedIn(false)
             setLoggedUserId(null)
+            setLoggedUsername(null)//aqui tambien
             return 
         }
 
@@ -36,11 +38,13 @@ const [ loggedUserId, setLoggedUserId ] = useState(null)
             //el token es valido
             setIsLoggedIn(true)
             setLoggedUserId(response.data.payload._id)
+            setLoggedUsername(response.data.payload.username)//pillar nombre igual que el user id
 
         } catch (error) {
             // el token no es valido o ha expirado
             setIsLoggedIn(false)
             setLoggedUserId(null)
+            setLoggedUsername(null)
         }
 
 
@@ -49,6 +53,7 @@ const [ loggedUserId, setLoggedUserId ] = useState(null)
     const passedContext = {
         isLoggedIn,
         loggedUserId,
+        loggedUsername,//y aqui como loggedid
         aunthenticateUser
     }
 

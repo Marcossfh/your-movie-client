@@ -57,7 +57,7 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="Login">
 
       <h1>Formulario de Acceso</h1>
 

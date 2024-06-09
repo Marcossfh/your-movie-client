@@ -1,49 +1,44 @@
-import { Link, useNavigate } from "react-router-dom"
-import { useContext, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
 //importar cntxt
-import { AuthContext } from "../context/auth.context"
+import { AuthContext } from "../context/auth.context";
 
 function Navbar() {
+  const { aunthenticateUser, isLoggedIn } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  const { aunthenticateUser, isLoggedIn } = useContext(AuthContext)
-  const navigate = useNavigate()
+  const handleLogout = async () => {
+    localStorage.removeItem("authToken");
 
-  const handleLogout =  async () => {
+    await aunthenticateUser();
 
-    // 1.quitar el token de localstorage
-    localStorage.removeItem("authToken")
+    navigate("/login");
+  };
 
-    // 2.cambiar las propiedades del contexto
-    await aunthenticateUser() //esto fuerza que el token no sea valido y cambiar los estados
-
-    // 3.redireccionar al usuario a pagina publica(home)
-    navigate("/login")
-
-  }
-  //meto useEffect para actualizar el estado cada vez que entras al navegador
   useEffect(() => {
-    aunthenticateUser()
-  }, [aunthenticateUser])
+    aunthenticateUser();
+  }, [aunthenticateUser]);
 
-    return (
-      
-        <nav>
-          <Link to="/">Home</Link>
+  return (
+    <nav>
+      <Link to="/">Home</Link>
 
-          {isLoggedIn === false && <>
-
+      {isLoggedIn === false && (
+        <>
           <Link to="/signup">Registro</Link>
           <Link to="/login">Acceso</Link>
-          </>}
+        </>
+      )}
 
-          {isLoggedIn === true && <> 
+      {isLoggedIn === true && (
+        <>
           <Link to="/main-movies-page">Pagina principal</Link>
+          <Link to="/favorito-page">Favoritos</Link>
           <Link onClick={handleLogout}>Cerrar sesión</Link>
-          
-          </>}
-        </nav>
-      );
-    }
-    
-    export default Navbar;
-    
+        </>
+      )}
+    </nav>
+  );
+}
+
+export default Navbar;
