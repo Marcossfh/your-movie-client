@@ -10,7 +10,6 @@ import TerrorPage from "./pages/TerrorPage";
 import SyfyPage from "./pages/SyfyPage";
 import FichaMoviePage from "./pages/FichaMoviePage";
 import CreateMoviePage from "./pages/CreateMoviePage";
-import CommentPage from "./pages/CommentPage";
 import NotFound from "./pages/NotFound";
 import EditMoviePage from "./pages/EditMoviePage";
 
@@ -39,7 +38,6 @@ function App() {
         />
         <Route path="/create-movies-page" element={<CreateMoviePage />} />
         <Route path="/edit-movie/:movieId" element={<EditMoviePage />} />
-        <Route path="/comment-page" element={<CommentPage />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
